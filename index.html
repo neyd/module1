@@ -1,0 +1,67 @@
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Модуль №3—СТЗІ</title>
+    </head>
+    <body>
+        <style>
+            body {
+                background-color:  BBB4DB;
+            }
+            input {
+                width: 300;
+                margin-left: 20%;
+                border-radius: 20px
+            }
+            .text {
+                font-family: sans-serif;
+                font-size: 25px;
+            }
+            li {
+                text-decoration: none;
+                display: inherit;
+                border: 1px solid black;
+                margin-top: 10px;
+                border-radius: 10px;
+            }
+            .time {
+                color: E3DFF2;
+                font-size: 12px;
+            }
+            .like {
+                float: right;
+                margin-top: -30px;
+                margin-right: 40px;
+                border-radius: 5px;
+                background-color: E3DFF2;
+            }
+        </style>
+        <input type="text" id="text">
+        <button id="add">Додати</button>
+        <div id="list">
+        </div>
+        <script> document.getElementById('add').addEventListener("click", add);
+            window.onload = function() {
+                for (var i = 0; i < localStorage.length; i++) {                  
+                    key = localStorage.key(i);
+                    document.body.appendChild(localStorage.getItem(key));
+                  }
+                          
+                          }
+            function add() {
+               var list = document.getElementById('list');
+               var text = document.getElementById('text');
+               var el = document.createElement("li");
+               var date = new Date();
+               el.innerHTML ='<p class="text">' + text.value +'</p>' +'<p class="time">' + date + '</p><div class="likes"><button class="like">0</button><button class="likesJoke">Накрутити лайки</button></div>';
+               list.appendChild(el);
+                localStorage.setItem(text.value,el.innerHTML);
+            }
+            list.addEventListener("click", function (like) {
+                if (like.target.classList.contains("like")) {
+                    like.target.innerHTML = parseInt(like.target.innerHTML) + 1;
+                }
+            });
+        </script>
+    </body>
+</html>
